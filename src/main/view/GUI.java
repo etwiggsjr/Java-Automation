@@ -9,9 +9,10 @@ public class GUI extends JFrame {
 
 public void startApp() {
         WelcomeScreen();
-    }
+        setVisible(true); // Making the frame visible
+}
 
-    public void WelcomeScreen() {
+    public void WelcomeScreen () {
         setTitle("Welcome to Ellis Tech");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -21,7 +22,7 @@ public void startApp() {
         JLabel titleLabel = new JLabel("Ellis Tech", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         
-        JLabel subtitleLabel = new JLabel("Ellis Automation", SwingConstants.CENTER);
+        JLabel subtitleLabel = new JLabel("Ellis Adding Services Automation", SwingConstants.CENTER);
         subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         
         JButton continueButton = new JButton("Continue");
