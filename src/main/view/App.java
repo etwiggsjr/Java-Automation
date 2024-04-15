@@ -8,5 +8,6 @@ public class App {
     public static void main(String[] args) {
         GUI gui = new GUI(); // initialize GUI
         gui.startApp(); // this starts the GUI
+
     }
 }
