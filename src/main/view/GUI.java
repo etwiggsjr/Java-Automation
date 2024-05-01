@@ -2,7 +2,6 @@ package src.main.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Objects;
 
 // Sources I used to help
 // https://www.w3schools.com/java/java_hashset.asp
@@ -19,7 +18,7 @@ public class GUI extends JFrame {
     public void welcomeScreen() {
         setTitle("Ellis Technologies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(400, 350); // Increased height to accommodate the logo
 
         setLocationRelativeTo(null); // Center the frame on the screen
         // Create components
@@ -27,10 +26,13 @@ public class GUI extends JFrame {
         welcomeTitleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         // Set title label text color to black
         welcomeTitleLabel.setForeground(Color.BLACK);
-        ImageIcon logo = new ImageIcon("Adding Services Automation Logo.png");
-        JLabel logoLabel = new JLabel(logo);
 
-        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Load and resize the logo
+        ImageIcon logoIcon = new ImageIcon("src/main/view/Adding Services Automation Logo.png");
+        Image logoImage = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon resizedLogoIcon = new ImageIcon(logoImage);
+        JLabel logoLabel = new JLabel(resizedLogoIcon);
+
         JButton loginButton = new JButton("Login");
         JButton quitButton = new JButton("Quit");
 
@@ -43,14 +45,20 @@ public class GUI extends JFrame {
         passwordField.setPreferredSize(new Dimension(200, 25));
 
         // Create panel and add components
-        JPanel welcomePanel = new JPanel(new BorderLayout());
-        welcomePanel.add(welcomeTitleLabel, BorderLayout.NORTH);
-        // Panel for login fields
-        // GridBagLayout for more precise control
-        JPanel loginPanel = new JPanel(new GridBagLayout());
+        JPanel welcomePanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        welcomePanel.setBackground(new Color(0, 0, 102)); // Dark blue color
+
+        // Add components to the panel with GridBagConstraints
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(10, 0, 10, 0); // Adjust spacing as needed
+        welcomePanel.add(logoLabel, gbc);
+
+        gbc.gridy++;
+        gbc.gridwidth = 1; // Reset grid width
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 10, 5, 10);
 
@@ -59,23 +67,29 @@ public class GUI extends JFrame {
         JLabel passwordLabel = new JLabel("Password: ");
         passwordLabel.setForeground(Color.WHITE); // Set password label text color to white
 
-        loginPanel.add(usernameLabel, gbc);
-        gbc.gridy++;
-        loginPanel.add(usernameField, gbc);
-        gbc.gridy++;
-        loginPanel.add(passwordLabel, gbc);
-        gbc.gridy++;
-        loginPanel.add(passwordField, gbc);
+        gbc.gridx = 0;
+        welcomePanel.add(usernameLabel, gbc);
+        gbc.gridx = 1;
+        welcomePanel.add(usernameField, gbc);
 
-        welcomePanel.add(loginPanel, BorderLayout.CENTER);
-        loginPanel.setBackground(new Color(108, 0, 0)); // Dark blue color
+        gbc.gridy++;
+        gbc.gridx = 0;
+        welcomePanel.add(passwordLabel, gbc);
+        gbc.gridx = 1;
+        welcomePanel.add(passwordField, gbc);
 
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(loginButton);
         buttonPanel.add(quitButton);
-        welcomePanel.add(buttonPanel, BorderLayout.SOUTH);
+        welcomePanel.add(buttonPanel, gbc);
+
         // Add panel to the frame
         add(welcomePanel);
+
         // Action listeners for buttons
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -95,6 +109,7 @@ public class GUI extends JFrame {
 
 
 
+
     public void ticketType() {
         setTitle("Ellis's Adding Services Automation");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,7 +126,7 @@ public class GUI extends JFrame {
         choiceBox.add("Debulk");
         choiceBox.add("Termination");
 
-        // Create text fields for ticket number, sub-memo, bulk master, and short decription
+        // Create text fields for ticket number, sub-memo, bulk master, and short description
         JTextField ticketNumberField = new JTextField(10);
         JTextField subMemoField = new JTextField(10);
         JTextField shortDescriptionField = new JTextField(10);
