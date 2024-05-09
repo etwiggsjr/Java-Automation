@@ -18,7 +18,7 @@ public class GUI extends JFrame {
     public void welcomeScreen() {
         setTitle("Ellis Technologies");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 350); // Increased height to accommodate the logo
+        setSize(380, 400); // Increased height to accommodate the logo
 
         setLocationRelativeTo(null); // Center the frame on the screen
         // Create components
@@ -50,7 +50,7 @@ public class GUI extends JFrame {
         welcomePanel.setBackground(new Color(0, 0, 102)); // Dark blue color
 
         // Add components to the panel with GridBagConstraints
-        gbc.gridx = 0;
+        gbc.gridx = 1; // Shifted the logo to the right
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
@@ -82,7 +82,9 @@ public class GUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the right
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 75, 0, 0)); // Add empty border to push buttons to the right
+        buttonPanel.setBackground(new Color(0, 0, 102));
         buttonPanel.add(loginButton);
         buttonPanel.add(quitButton);
         welcomePanel.add(buttonPanel, gbc);
