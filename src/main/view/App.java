@@ -6,8 +6,10 @@ package src.main.view;
 
 public class App {
     public static void main(String[] args) {
+        // Sources I used to help
+        //https://www.geeksforgeeks.org/the-initializer-block-in-java/
+        // https://www.geeksforgeeks.org/static-keyword-java/
         GUI gui = new GUI(); // initialize GUI
         gui.startApp(); // this starts the GUI
-
     }
 }
