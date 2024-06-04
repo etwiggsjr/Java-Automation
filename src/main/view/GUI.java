@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 // Sources I used to help
 // https://www.w3schools.com/java/java_hashset.asp
@@ -175,56 +176,56 @@ public class GUI extends JFrame {
 
         // Adding the label and choice box to NORTH
         tickettypepanel.add(tickettitleLabel, BorderLayout.NORTH);
-        JPanel ticketInputPanel = new JPanel(new GridBagLayout());
+        JPanel tickeTypeInputPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.EAST;
-        ticketInputPanel.add(new JLabel("Ticket Type:"), gbc);
+        tickeTypeInputPanel.add(new JLabel("Ticket Type:"), gbc);
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        ticketInputPanel.add(choiceBox, gbc);
+        tickeTypeInputPanel.add(choiceBox, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;  // Incremented to move to the next row
         gbc.anchor = GridBagConstraints.EAST;
-        ticketInputPanel.add(new JLabel("Bulk Master #:"), gbc);
+        tickeTypeInputPanel.add(new JLabel("Bulk Master #:"), gbc);
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        ticketInputPanel.add(bulkMasterField, gbc);
+        tickeTypeInputPanel.add(bulkMasterField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;  // Incremented to move to the next row
         gbc.anchor = GridBagConstraints.EAST;
-        ticketInputPanel.add(new JLabel("Ticket Number:"), gbc);
+        tickeTypeInputPanel.add(new JLabel("Ticket Number:"), gbc);
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        ticketInputPanel.add(ticketNumberField, gbc);
+        tickeTypeInputPanel.add(ticketNumberField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;  // Incremented to move to the next row
         gbc.anchor = GridBagConstraints.EAST;
-        ticketInputPanel.add(new JLabel("Sub-Memo:"), gbc);
+        tickeTypeInputPanel.add(new JLabel("Sub-Memo:"), gbc);
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        ticketInputPanel.add(subMemoField, gbc);
+        tickeTypeInputPanel.add(subMemoField, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 4;  // Incremented to move to the next row
         gbc.anchor = GridBagConstraints.EAST;
-        ticketInputPanel.add(new JLabel("Short description:"), gbc);
+        tickeTypeInputPanel.add(new JLabel("Short description:"), gbc);
 
         gbc.gridx = 1;
         gbc.anchor = GridBagConstraints.WEST;
-        ticketInputPanel.add(shortDescriptionField, gbc);
+        tickeTypeInputPanel.add(shortDescriptionField, gbc);
         // Add input panel to CENTER
-        tickettypepanel.add(ticketInputPanel, BorderLayout.CENTER);
+        tickettypepanel.add(tickeTypeInputPanel, BorderLayout.CENTER);
         // Create buttons
         JButton ticketTypeContinueButton = new JButton("Continue");
         JButton ticketTypeTimeMachineButton = new JButton("Time Machine");
@@ -272,6 +273,19 @@ public class GUI extends JFrame {
             }
         });
 
+        ticketTypeContinueButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Code to handle logout button click
+                // Clears all components from the content pane.
+                getContentPane().removeAll();
+                // Recalculates the layout of the container.
+                revalidate();
+                // Forces a repaint of the container to reflect the changes.
+                repaint();
+                // Call welcomeScreen method.
+                override();
+            }
+        });
 
         // Add action listeners for logout button
         ticketTypeLogOutButton.addActionListener(new ActionListener() {
@@ -290,6 +304,7 @@ public class GUI extends JFrame {
         // Add panel to the frame
         add(tickettypepanel);
     }
+
     public void timeMachine() {
         setTitle("Ellis's Adding Services Automation");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -303,6 +318,7 @@ public class GUI extends JFrame {
 
         // Create the logout button
         JButton logoutButton = new JButton("Logout");
+        // Create the back button
         JButton backButton = new JButton("Back");
 
         logoutButton.addActionListener(new ActionListener() {
@@ -376,7 +392,7 @@ public class GUI extends JFrame {
         LocalDate today = LocalDate.now();
         for (int i = 0; i < 7; i++) {
             LocalDate date = today.minusDays(i);
-            String dateString = date.format(formatter) + ": Twixter";
+            String dateString = date.format(formatter) + ": Ellis T - Billing Ops";
 
             // Create a panel for each section.
             JPanel sectionPanel = new JPanel(new BorderLayout());
@@ -407,4 +423,234 @@ public class GUI extends JFrame {
 
         add(timemachinePanel);
     }
+
+    public void override() {
+        setTitle("Ellis's Adding Services Automation");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null); // Center the frame on the screen
+
+        // Create the main panel with GridBagLayout
+        JPanel overridePanel = new JPanel(new GridBagLayout());
+        overridePanel.setBackground(new Color(0, 0, 102)); // Dark blue color
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        // Add the title label to the top of the panel
+        JLabel overrideTitleLabel = new JLabel("Adding Services:", SwingConstants.CENTER);
+        overrideTitleLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        overrideTitleLabel.setForeground(Color.WHITE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 5;
+        gbc.insets = new Insets(20, 0, 20, 0);
+        gbc.anchor = GridBagConstraints.NORTH;
+        overridePanel.add(overrideTitleLabel, gbc);
+
+        // Define the choices
+        String[] tvChoices = { "TVSLCT", "ESSEN", "CHOICE" };
+        String[] boxChoices = { "0", "1", "2", "3", "4", "5" };
+        String[] wifiChoices = { "PLUS", "ULT", "GIG" };
+
+        // Combo boxes
+        Dimension comboBoxSize = new Dimension(100, 25);
+
+        // Create a random number generator
+        Random random = new Random();
+
+        // Add 5 sections
+        for (int i = 1; i <= 5; i++) {
+            // Generate a random 12-digit number
+            String accountNumber = String.format("%012d", random.nextLong() & 0xFFFFFFFFFFFFL);
+
+            // Account Number Section
+            JLabel accountLabel = new JLabel("Account #: " + accountNumber);
+            accountLabel.setForeground(Color.WHITE);
+            gbc.gridx = 0;
+            gbc.gridy = i * 3 - 2;
+            gbc.gridwidth = 1;
+            gbc.insets = new Insets(10, 10, 5, 10); // Increased top padding
+            gbc.anchor = GridBagConstraints.WEST;
+            overridePanel.add(accountLabel, gbc);
+
+            // TV Section
+            JLabel tvLabel = new JLabel("TV");
+            tvLabel.setForeground(Color.WHITE);
+            gbc.gridx = 1;
+            gbc.gridy = i * 3 - 2;
+            gbc.insets = new Insets(10, 10, 5, 10); // Increased top padding
+            gbc.anchor = GridBagConstraints.CENTER;
+            overridePanel.add(tvLabel, gbc);
+
+            JComboBox<String> tvComboBox = new JComboBox<>(tvChoices);
+            tvComboBox.setPreferredSize(comboBoxSize);
+            gbc.gridx = 1;
+            gbc.gridy = i * 3 - 1;
+            gbc.insets = new Insets(0, 10, 10, 10); // Increased bottom padding
+            overridePanel.add(tvComboBox, gbc);
+
+            // Boxes Section
+            JLabel boxesLabel = new JLabel("Boxes");
+            boxesLabel.setForeground(Color.WHITE);
+            gbc.gridx = 2;
+            gbc.gridy = i * 3 - 2;
+            gbc.insets = new Insets(10, 10, 5, 10); // Increased top padding
+            overridePanel.add(boxesLabel, gbc);
+
+            JComboBox<String> boxesComboBox = new JComboBox<>(boxChoices);
+            boxesComboBox.setPreferredSize(comboBoxSize);
+            gbc.gridx = 2;
+            gbc.gridy = i * 3 - 1;
+            gbc.insets = new Insets(0, 10, 10, 10); // Increased bottom padding
+            overridePanel.add(boxesComboBox, gbc);
+
+            // WIFI Section
+            JLabel wifiLabel = new JLabel("WIFI");
+            wifiLabel.setForeground(Color.WHITE);
+            gbc.gridx = 3;
+            gbc.gridy = i * 3 - 2;
+            gbc.insets = new Insets(10, 10, 5, 10); // Increased top padding
+            overridePanel.add(wifiLabel, gbc);
+
+            JComboBox<String> wifiComboBox = new JComboBox<>(wifiChoices);
+            wifiComboBox.setPreferredSize(comboBoxSize);
+            gbc.gridx = 3;
+            gbc.gridy = i * 3 - 1;
+            gbc.insets = new Insets(0, 10, 10, 10); // Increased bottom padding
+            overridePanel.add(wifiComboBox, gbc);
+            // Override Checkbox
+            JCheckBox overrideCheckBox = new JCheckBox("Override");
+            overrideCheckBox.setForeground(Color.WHITE);
+            overrideCheckBox.setBackground(new Color(0, 0, 102)); // Match the panel color
+            gbc.gridx = 4;
+            gbc.gridy = i * 3 - 2;
+            gbc.gridheight = 2;
+            gbc.insets = new Insets(10, 10, 10, 10); // Increased padding
+            gbc.anchor = GridBagConstraints.EAST;
+            overridePanel.add(overrideCheckBox, gbc);
+
+            // Add action listener to the checkbox
+            overrideCheckBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (overrideCheckBox.isSelected()) {
+                        // Open new window when checked
+                        JFrame overrideFrame = new JFrame("Override");
+                        overrideFrame.setSize(400, 300);
+                        overrideFrame.setLocationRelativeTo(null);
+                        overrideFrame.setLayout(new BorderLayout());
+
+                        // Create the main panel for the override window
+                        JPanel overrideMainPanel = new JPanel(new GridBagLayout());
+                        overrideMainPanel.setBackground(new Color(0, 0, 102)); // Dark blue color
+                        GridBagConstraints overrideGbc = new GridBagConstraints();
+
+                        // Override label
+                        JLabel overrideLabel = new JLabel("Override", SwingConstants.CENTER);
+                        overrideLabel.setFont(new Font("Arial", Font.BOLD, 24));
+                        overrideLabel.setForeground(Color.WHITE);
+                        overrideGbc.gridx = 0;
+                        overrideGbc.gridy = 0;
+                        overrideGbc.gridwidth = GridBagConstraints.REMAINDER;
+                        overrideGbc.insets = new Insets(20, 0, 10, 0); // Adjusted to move the label higher
+                        overrideGbc.anchor = GridBagConstraints.NORTH;
+                        overrideMainPanel.add(overrideLabel, overrideGbc);
+
+                        // Approvers label and combo box
+                        JLabel approversLabel = new JLabel("Approvers");
+                        approversLabel.setForeground(Color.WHITE);
+                        overrideGbc.gridx = 0;
+                        overrideGbc.gridy = 1;
+                        overrideGbc.gridwidth = GridBagConstraints.REMAINDER;
+                        overrideGbc.insets = new Insets(10, 0, 5, 0);
+                        overrideGbc.anchor = GridBagConstraints.CENTER;
+                        overrideMainPanel.add(approversLabel, overrideGbc);
+
+                        String[] approvers = { "Ellis T - Sup Billing Ops", "Billie R - Mgr Billing Ops", "Leica M - Dir Billing Ops" };
+                        JComboBox<String> approversComboBox = new JComboBox<>(approvers);
+                        Dimension approversComboBoxSize = new Dimension(200, 25); // Increased width
+                        approversComboBox.setPreferredSize(approversComboBoxSize);
+                        overrideGbc.gridx = 0;
+                        overrideGbc.gridy = 2;
+                        overrideGbc.gridwidth = GridBagConstraints.REMAINDER;
+                        overrideGbc.insets = new Insets(0, 0, 10, 0);
+                        overrideGbc.anchor = GridBagConstraints.CENTER;
+                        overrideMainPanel.add(approversComboBox, overrideGbc);
+
+                        // Email notification label
+                        JLabel emailNotificationLabel = new JLabel("An email will be sent to the requested approver", SwingConstants.CENTER);
+                        emailNotificationLabel.setFont(new Font("Arial", Font.ITALIC, 12));
+                        emailNotificationLabel.setForeground(Color.WHITE);
+                        overrideGbc.gridx = 0;
+                        overrideGbc.gridy = 3;
+                        overrideGbc.gridwidth = GridBagConstraints.REMAINDER;
+                        overrideGbc.insets = new Insets(10, 0, 10, 10);
+                        overrideGbc.anchor = GridBagConstraints.SOUTHEAST;
+                        overrideMainPanel.add(emailNotificationLabel, overrideGbc);
+
+                        overrideFrame.add(overrideMainPanel, BorderLayout.CENTER);
+                        overrideFrame.setVisible(true);
+                    }
+                }
+            });
+
+            // Add separator between sections
+            if (i < 5) {
+                JSeparator separator = new JSeparator();
+                gbc.gridx = 0;
+                gbc.gridy = i * 3;
+                gbc.gridwidth = 5;
+                gbc.gridheight = 1;
+                gbc.insets = new Insets(10, 0, 10, 0); // Increased vertical padding for separator
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                overridePanel.add(separator, gbc);
+            }
+        }
+
+        // Create the button panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(0, 0, 102)); // Match the panel color
+        JButton logoutButton = new JButton("Logout");
+        JButton backButton = new JButton("Back");
+        buttonPanel.add(logoutButton);
+        buttonPanel.add(backButton);
+
+        // Add the button panel at the bottom
+        gbc.gridx = 0;
+        gbc.gridy = 16; // Adjusted to fit the new layout
+        gbc.gridwidth = 5;
+        gbc.insets = new Insets(20, 0, 20, 0);
+        gbc.anchor = GridBagConstraints.SOUTH;
+        overridePanel.add(buttonPanel, gbc);
+
+        logoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Code to handle logout button click
+                // Clears all components from the content pane.
+                getContentPane().removeAll();
+                // Recalculates the layout of the container.
+                revalidate();
+                // Forces a repaint of the container to reflect the changes.
+                repaint();
+                // Call welcomeScreen method.
+                welcomeScreen();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Code to handle back button click
+                // Clears all components from the content pane.
+                getContentPane().removeAll();
+                // Recalculates the layout of the container.
+                revalidate();
+                // Forces a repaint of the container to reflect the changes.
+                repaint();
+                // Call ticketType method.
+                ticketType();
+            }
+        });
+
+        add(overridePanel);
+    }
+
+
 }
